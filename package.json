@@ -1,0 +1,25 @@
+{
+  "name": "cobrandosaspruebatecnica",
+  "version": "1.0.0",
+  "description": "Prueba técnica para ingresar a COBRANDO S.A.S.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon bin/www.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@awaitjs/express": "^0.9.0",
+    "config": "^3.3.8",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.23.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.24.0",
+    "nodemon": "^2.0.20"
+  }
+}

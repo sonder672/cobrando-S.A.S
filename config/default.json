@@ -1,0 +1,12 @@
+{
+    "db": {
+        "port": 5433,
+        "host": "localhost",
+        "dbname": "cobrando_sas",
+        "username": "cobrando",
+        "password": "passw0rd"
+    },
+    "server": {
+        "port": 1234
+    }
+}
