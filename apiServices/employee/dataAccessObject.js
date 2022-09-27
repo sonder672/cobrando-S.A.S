@@ -9,11 +9,11 @@ module.exports = {
         return employeeModel.findByPk(code);
     },
 
-    async createEmployee(employee) {
+    createEmployee(employee) {
         return employeeModel.create(employee);
     },
 
-    async updateEmployee(code, employee) {
+    updateEmployee(code, employee) {
         return employeeModel.update(employee, {
             where: {
                 code: code
@@ -21,7 +21,7 @@ module.exports = {
         });
     },
 
-    async deleteEmployee(code) {
+    deleteEmployee(code) {
         return employeeModel.destroy({
             where: {
                 code
