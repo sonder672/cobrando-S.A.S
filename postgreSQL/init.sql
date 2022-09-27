@@ -14,7 +14,7 @@ CREATE TABLE employees(
     department_code INT,
     PRIMARY KEY (code),
     FOREIGN KEY (department_code)
-    REFERENCES department(code)
+    REFERENCES departments(code)
 ); 
 
 INSERT INTO departments(code, name, budget) 
