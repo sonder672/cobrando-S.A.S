@@ -1,41 +1,31 @@
 const employeeModel = require('../../models/employee');
 
 module.exports = {
-    async getEmployees() {
-        return new Promise((resolve, reject) => 
-            employeeModel.findAll({}, (err, docs) => {
-                if (err) return reject(err);
-                return resolve(docs);
-            })); 
+    getEmployees() {
+        return employeeModel.findAll();
     },
 
-    async getEmployee(code) {
-        return new Promise((resolve, reject) => 
-            employeeModel.findByPk(code, (err, docs) => {
-                if (err) return reject(err);
-                return resolve(docs);
-            })); 
+    getEmployee(code) {
+        return employeeModel.findByPk(code);
     },
 
     async createEmployee(employee) {
-        return new Promise((resolve, reject) => employeeModel.create(employee, (err, docs) => {
-            if (err) return reject(err);
-            return resolve(docs);
-        }));
+        return employeeModel.create(employee);
     },
 
-    async updateEmployee() {
-        
+    async updateEmployee(code, employee) {
+        return employeeModel.update(employee, {
+            where: {
+                code: code
+            }
+        });
     },
 
     async deleteEmployee(code) {
-        return new Promise((resolve, reject) => employeeModel.destroy({
+        return employeeModel.destroy({
             where: {
                 code
             }
-        }, (err, docs) => {
-            if (err) return reject(err);
-            return resolve(docs);
-        }));
+        });
     }
 };

@@ -2,34 +2,95 @@ const dataAccessObject = require('./dataAccessObject');
 
 module.exports = {
     async getEmployees() {
-        return dataAccessObject.getEmployees();
+        try {
+            return await dataAccessObject.getEmployees();
+        } catch (error) {
+            console.log(error.message);
+            throw new error('Ha habido un problema listando los empledos');
+        }
     },
 
-    getEmployee(code) {
+    /**
+     * @param {int} code 
+     */
+    async getEmployee(code) {
         if (code === null) {
             throw new Error('Debe enviarse el identificador del empleado que quiere consultar');
         }
 
-        return dataAccessObject.getEmployee(code);
+        try {
+            const employee = await dataAccessObject.getEmployee(code);
+            if (employee === null) {
+                throw new Error('El empleado que desea buscar no existe');
+            }
+
+            return employee;
+        } catch (error) {
+            console.log(error.message);
+            throw new error('Ha habido un problema listando el empleado');
+        }
     },
 
-    createEmployee(employee) {
-        return dataAccessObject.createEmployee(employee);
+    /**
+     * @param {json} employee 
+     */
+    async createEmployee(employee) {
+        const searchEmployee = await dataAccessObject.getEmployee(employee.code);
+
+        if (searchEmployee !== null) {
+            throw new ('El código ya fue asignado a otra persona. Coloque otro');
+        }
+
+        try {
+            return await dataAccessObject.createEmployee(employee);
+        } catch (error) {
+            console.log(error.message);
+            throw new Error('Hubo un problema con la creación del empleado');
+        }
     },
 
-    updateEmployee(code) {
+    /**
+     * @param {int} code 
+     * @param {json} employee 
+     */
+    async updateEmployee(code, employee) {
         if (code === null) {
             throw new Error('Debe enviarse el identificador del empleado que quiere eliminar');
         }
 
-        console.log(code);
+        const searchEmployee = await dataAccessObject.getEmployee(code);
+
+        if (searchEmployee === null) {
+            throw new ('No existe un usuario con este código para ser actualizado');
+        }
+
+        try {
+            return await dataAccessObject.updateEmployee(code, employee);
+        } catch (error) {
+            console.log(error.message);
+            throw new Error('Ha habido un problema actualizando el empleado');
+        }
     },
 
-    deleteEmployee(code) {
+    /**
+     * @param {int} code 
+     */
+    async deleteEmployee(code) {
         if (code === null) {
             throw new Error('Debe enviarse el identificador del empleado que quiere eliminar');
         }
 
-        return dataAccessObject.deleteEmployee(code);
+        const employee = await dataAccessObject.getEmployee(code);
+
+        if (employee === null) {
+            throw new ('El usuario que desea eliminar no existe');
+        }
+
+        try {
+            return await dataAccessObject.deleteEmployee(code);
+        } catch (error) {
+            console.log(error.message);
+            throw new Error('Ha habido un problema eliminando este empleado');
+        }
     }
 };

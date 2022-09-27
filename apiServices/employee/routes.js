@@ -1,12 +1,12 @@
-const express = require('@awaitjs/express');
+const express = require('express');
 const controller = require('./controller');
 
 const router = express.Router();
 
-router.getAsync('/employees', controller.getEmployees);
-router.getAsync('/employee/:id', controller.getEmployee);
-router.postAsync('/employee', controller.createEmployee);
-router.patchAsync('/employee/:id', controller.updateEmployee);
-router.deleteAsync('/employee/:id', controller.deleteEmployee);
+router.get('/', controller.getEmployees);
+router.get('/:id', controller.getEmployee);
+router.post('/', controller.createEmployee);
+router.patch('/:id', controller.updateEmployee);
+router.delete('/:id', controller.deleteEmployee);
 
 module.exports = router;

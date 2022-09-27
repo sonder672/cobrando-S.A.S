@@ -4,18 +4,18 @@ module.exports = {
     async getEmployees(req, res) {
         try {
             const employees = await service.getEmployees();
-            res.status(200).json(employees);
+            return res.status(200).json(employees);
         } catch (error) {
-            res.status(500).json({message: error.message});
+            return res.status(500).json({message: error.message});
         }
     },
   
     async getEmployee(req, res) {
         try {
-            const employee = await service.getEmployee({code: req.params.code});
-            res.status(200).json(employee);
+            const employee = await service.getEmployee(req.params.id);
+            return res.status(200).json(employee);
         } catch (error) {
-            res.status(500).json({message: error.message});
+            return res.status(500).json({message: error.message});
         }
     },
   
@@ -38,14 +38,24 @@ module.exports = {
     },
   
     async updateEmployee(req, res) {
-        console.log(req, res);
+        try {
+            await service.updateEmployee(req.params.id, {
+                nif: req.body.nif,
+                name: req.body.name,
+                surname: req.body.surname,
+                second_surname: req.body.second_surname
+            });
 
+            res.status(201).json({message: 'Updated, ' + req.body.name});
+        } catch (error) {
+            res.status(500).json({message: error.message});
+        }
     },
 
     async deleteEmployee(req, res) {
         try {
-            await service.deleteEmployee({code: req.id.code});
-            res.status(204).json({message: 'Deleted'});
+            await service.deleteEmployee(req.params.id);
+            res.status(204).json({message: 'deleted'});
         } catch (error) {
             res.status(500).json({message: error.message});
         }
