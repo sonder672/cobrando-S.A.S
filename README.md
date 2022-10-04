@@ -1,9 +1,8 @@
-# Prueba técnica para ingresar a COBRANDO S.A.S.
-
 ## ¿Cómo usar el servidor?
-* Clone el proyecto **https://github.com/sonder672/cobrando-S.A.S.**
+* Clone el proyecto **https://github.com/sonder672/crud-nodeJs**
 * Ejecute el comando **npm install**
 * En la carpeta /postgreSQL ejecute el comando **docker-compose up -d**
+* Levante el servidor con **npm run dev**
 * Consuma los endpoints (servicios) que se crearon a través de Postman o una herramienta de APIS 
 
 ### Endpoints que deben consumirse:
